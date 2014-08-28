@@ -1,5 +1,5 @@
 <?php
-// Smallest: Finished in 320 Characters
+// Smallest: Finished in 314 Characters
 // No DB Params, relying on shell execution to shorten item count
 
 // Create
@@ -11,4 +11,4 @@
 // View
 // CREATE VIEW b AS SELECT Title, ISBN FROM d.Books ORDER BY Title ASC;
 
-exec('mysql -N -uu -pp -e"SELECT * FROM d.b\g"',$o);$z='<br>';$a=[];foreach($o AS$k=>$v){$e=explode("\t",$v);@$a[substr(ucwords($e[0]),0,1)].="<a href='/{$e[1]}'>{$e[0]}</a>$z";}foreach(range('A','Z') AS$l){echo(isset($a[$l]))?"<a href='/#$l'>$l</a> ":"$l ";}echo$z;foreach($a AS$k=>$v){echo"<a name='$k'>$k</a>$z$v\n";}
+$z='<br>';$a=[];exec('mysql -N -uu -pp -e"SELECT * FROM d.b"',$o);foreach($o AS$k=>$v){$e=explode("\t",$v);@$a[substr(ucwords($e[0]),0,1)].="<a href='/{$e[1]}'>{$e[0]}</a>$z";}foreach(range('A','Z') AS$l)echo(isset($a[$l]))?"<a href='/#$l'>$l</a> ":"$l ";echo$z;foreach($a AS$k=>$v)echo"<a name='$k'>$k</a>$z$v\n";
