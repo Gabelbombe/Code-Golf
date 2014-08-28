@@ -19,4 +19,9 @@
  * $a[substr(ucwords($e[0]),0,1)].="<a href='/{$e[1]}'>{$e[0]}</a> will raise due to undefined index, but will create on the fly
  */
 
-$z='<br>';$a=[];exec('mysql -N -uu -pp -e"SELECT * FROM d.b"',$o);foreach($o AS$k=>$v){$e=split("\t",$v);$a[substr(ucwords($e[0]),0,1)].="<a href='/{$e[1]}'>{$e[0]}</a>$z";}foreach(range('A','Z') AS$l)echo(isset($a[$l]))?"<a href='/#$l'>$l</a> ":"$l ";echo$z;foreach($a AS$k=>$v)echo"<a name='$k'>$k</a>$z$v\n";
+$z='<br>';$a=[];exec('mysql -N -uu -pp -e"SELECT * FROM d.b"',$o);foreach($o AS$k=>$v){$e=split("\t",$v);
+
+	echo $e[0] . "\n";
+	echo $e[0][0]; die;
+
+	$a[substr(lcfirst($e[0]),0,1)].="<a href='/{$e[1]}'>{$e[0]}</a>$z";}foreach(range('A','Z') AS$l)echo(isset($a[$l]))?"<a href='/#$l'>$l</a> ":"$l ";echo$z;foreach($a AS$k=>$v)echo"<a name='$k'>$k</a>$z$v\n";
