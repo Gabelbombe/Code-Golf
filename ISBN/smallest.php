@@ -1,5 +1,5 @@
 <?php
-// Smallest: Finished in 363 Characters
+// Smallest: Finished in 328 Characters
 // No DB Params, relying on shell execution to shorten item count
 
 // Create
@@ -8,4 +8,7 @@
 // Load
 // DELETE FROM Books; LOAD DATA INFILE '{path}/loader.csv'; INTO TABLE Books FIELDS TERMINATED BY '\t'  LINES TERMINATED BY '\n' (Title, ISBN, Description); SHOW WARNINGS;
 
-exec('mysql -uu -pp -e"SELECT Title, ISBN FROM d.Books ORDER BY Title ASC"', $o);unset($o[0]);$a=[];foreach($o AS $k=>$v){$e=explode("\t",$v);@$a[substr(ucwords($e[0]),0,1)].="<a href='/{$e[1]}'>{$e[0]}</a><br>";}foreach(range('A','Z') AS $l){echo(isset($a[$l]))?"<a href='/#$l'>$l</a> ":"$l ";}echo'<br>';foreach($a AS $k=>$v){echo"<a name='$k'>$k</a><br>$v\n";}
+// View
+// CREATE VIEW b AS SELECT Title, ISBN FROM d.Books ORDER BY Title ASC;
+
+exec('mysql -uu -pp -e"SELECT * FROM b"', $o);unset($o[0]);$a=[];foreach($o AS $k=>$v){$e=explode("\t",$v);@$a[substr(ucwords($e[0]),0,1)].="<a href='/{$e[1]}'>{$e[0]}</a><br>";}foreach(range('A','Z') AS $l){echo(isset($a[$l]))?"<a href='/#$l'>$l</a> ":"$l ";}echo'<br>';foreach($a AS $k=>$v){echo"<a name='$k'>$k</a><br>$v\n";}
