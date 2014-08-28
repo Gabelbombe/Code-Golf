@@ -1,5 +1,6 @@
-<?php
-// Smallest: Finished in 314 Characters
+<?php error_reporting(1);
+
+// Smallest: Finished in 311 Characters
 // No DB Params, relying on shell execution to shorten item count
 
 // Create
@@ -11,4 +12,11 @@
 // View
 // CREATE VIEW b AS SELECT Title, ISBN FROM d.Books ORDER BY Title ASC;
 
-$z='<br>';$a=[];exec('mysql -N -uu -pp -e"SELECT * FROM d.b"',$o);foreach($o AS$k=>$v){$e=explode("\t",$v);@$a[substr(ucwords($e[0]),0,1)].="<a href='/{$e[1]}'>{$e[0]}</a>$z";}foreach(range('A','Z') AS$l)echo(isset($a[$l]))?"<a href='/#$l'>$l</a> ":"$l ";echo$z;foreach($a AS$k=>$v)echo"<a name='$k'>$k</a>$z$v\n";
+/**
+ * Notes:
+ * Warnings and Deprecation notice were turned OFF for this Code Golf, and are not being counted against the char limit
+ * split() is deprecated and will raise warnings
+ * $a[substr(ucwords($e[0]),0,1)].="<a href='/{$e[1]}'>{$e[0]}</a> will raise due to undefined index, but will create on the fly
+ */
+
+$z='<br>';$a=[];exec('mysql -N -uu -pp -e"SELECT * FROM d.b"',$o);foreach($o AS$k=>$v){$e=split("\t",$v);$a[substr(ucwords($e[0]),0,1)].="<a href='/{$e[1]}'>{$e[0]}</a>$z";}foreach(range('A','Z') AS$l)echo(isset($a[$l]))?"<a href='/#$l'>$l</a> ":"$l ";echo$z;foreach($a AS$k=>$v)echo"<a name='$k'>$k</a>$z$v\n";
